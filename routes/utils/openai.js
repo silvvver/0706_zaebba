@@ -8,7 +8,7 @@
 import { OpenAI } from "openai";
 
 // >>> Debug-вывод переменной окружения (убери, когда убедишься что всё ок)
-console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
+//console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
 const openai   = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const MODEL_ID = process.env.MODEL_ID || "gpt-4o";
