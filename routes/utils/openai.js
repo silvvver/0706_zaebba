@@ -9,6 +9,9 @@ import { OpenAI } from "openai";
 import dotenv     from "dotenv";
 dotenv.config();
 
+// >>> Вставь debug-вывод переменной окружения
+console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
+
 const openai   = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const MODEL_ID = process.env.MODEL_ID || "gpt-4o";
 
