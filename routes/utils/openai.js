@@ -6,10 +6,8 @@
    • возвращает { answer, isPalm, usage }
 */
 import { OpenAI } from "openai";
-import dotenv     from "dotenv";
-dotenv.config();
 
-// >>> Вставь debug-вывод переменной окружения
+// >>> Debug-вывод переменной окружения (убери, когда убедишься что всё ок)
 console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
 const openai   = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
