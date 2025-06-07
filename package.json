@@ -1,0 +1,31 @@
+{
+  "name": "vkpalm-ver4",
+  "version": "1.0.0",
+  "description": "Backend for AI-chiromancy VK Mini App (image upload, OpenAI vision, paid & free flow)",
+  "main": "server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.22-rc.20250304",
+    "canvas": "^3.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.2",
+    "openai": "^4.98.0",
+    "sharp": "^0.34.1"
+  }
+}
+

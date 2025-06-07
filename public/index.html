@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Онлайн-хиромантия</title>
+</head>
+<body>
+  <h2>🔮 Загрузите фото ладони</h2>
+  <form id="form">
+    <input type="file" name="handImage" accept="image/*" required><br><br>
+    <label><input type="radio" name="style" value="ted" checked> Тэдус (юмор)</label>
+    <label><input type="radio" name="style" value="professor"> Профессор</label>
+    <label><input type="radio" name="style" value="buzova"> Бузова</label>
+    <br><br>
+    <button type="submit">📤 Отправить</button>
+  </form>
+  <pre id="result" style="white-space:pre-wrap;font-family:inherit;"></pre>
+  
+  <!-- Подключаем внешний конфиг с переменной API_URL -->
+  <script src="config.js"></script>
+  <script>
+    const form = document.getElementById('form');
+    const result = document.getElementById('result');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      result.textContent = '⏳ Анализируем…';
+      const fd = new FormData(form);
+      try {
+        // Используем API_URL из config.js!
+        const r = await fetch(`${API_URL}/analyze`, { method:'POST', body: fd });
+        const json = await r.json();
+        result.textContent = json.result || '⚠️ Пустой ответ';
+      } catch (err) {
+        result.textContent = '❌ Ошибка: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
