@@ -1,16 +1,17 @@
+// ВАЖНО: dotenv ДО ВСЕГО!
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import analyzeRoute from "./routes/analyze.js";
-
-dotenv.config();
 
 const app = express();
 
 // Поддержка CORS
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS
-    ? process.env.ALLOWED_ORIGINS.split(/\s*,\s*/)
+  origin: process.env.ALLOWED_ORIGIN
+    ? process.env.ALLOWED_ORIGIN.split(/\s*,\s*/)
     : "*",
   credentials: true,
 }));
@@ -30,4 +31,6 @@ app.use((req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🔮  Backend online  →  http://localhost:${PORT}`);
+  // DEBUG! Показываем ключ (на проде убери строку!)
+  // console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
 });

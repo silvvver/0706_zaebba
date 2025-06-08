@@ -1,16 +1,6 @@
-/* routes/utils/openai.js
-   ──────────────────────
-   Один «универсальный» хелпер: askVision()
-   • делает GPT-Vision-запрос
-   • на первой строке просит модель честно ответить yes/no ― ладонь ли это
-   • возвращает { answer, isPalm, usage }
-*/
+// routes/utils/openai.js
 import { OpenAI } from "openai";
 
-// >>> Debug-вывод переменной окружения (убери, когда убедишься что всё ок)
-//console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
-
-const openai   = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const MODEL_ID = process.env.MODEL_ID || "gpt-4o";
 
 /**
@@ -19,6 +9,9 @@ const MODEL_ID = process.env.MODEL_ID || "gpt-4o";
  * @param {string} prompt      — полный system+user-prompt
  */
 export async function askVision(imageBuffer, filename, prompt) {
+  // <<<<< Перемещаем сюда! >>>>>
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
   const imageBase64 = imageBuffer.toString("base64");
 
   const messages = [
@@ -49,11 +42,11 @@ export async function askVision(imageBuffer, filename, prompt) {
 
   const raw   = chat.choices?.[0]?.message?.content?.trim() || "";
   const [first, ...rest] = raw.split(/\n+/);
-  const isPalm = /^yes\b/i.test(first.trim());      // ← GPT сказала «yes»?
+  const isPalm = /^yes\b/i.test(first.trim());
 
   return {
-    answer : rest.join("\n").trim(),  // то, что после первой строки
+    answer : rest.join("\n").trim(),
     isPalm,
-    usage  : chat.usage,              // пригодится для логов/аналитики
+    usage  : chat.usage,
   };
 }
